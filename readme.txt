@@ -17,6 +17,8 @@ mvn test
 
 mvn surefire-report:report
 
-This will create a report in the target/site directory of your project.
+This will create a report in the target/site directory of your project. But as we add target directy in 
+.gitignore so you might not able to see it in github
+
 
 

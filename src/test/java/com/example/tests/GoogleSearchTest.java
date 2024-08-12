@@ -29,6 +29,13 @@ public class GoogleSearchTest {
         // Assert that the search results page contains the word "Selenium"
         assert driver.getPageSource().contains("Selenium");
     }
+    
+    @Test
+    public void testme() {
+    	
+    	System.out.println("This is also tested");
+    	
+    }
 
     @After
     public void tearDown() {

@@ -1,0 +1,33 @@
+# Maven target directory
+/target/
+
+# Eclipse-specific files
+/.settings/
+/bin/
+/.project
+/.classpath
+
+# Maven specific files
+/.mvn/
+mvnw
+mvnw.cmd
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# IDE-specific files
+.idea/
+.vscode/
+.eclipse/
+
+# Git-specific files
+.git/
+
+# JaCoCo coverage reports
+/target/site/jacoco/
+
+# Exclude any other generated files or folders here

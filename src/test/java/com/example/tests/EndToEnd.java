@@ -48,6 +48,26 @@ public class EndToEnd {
             WebElement countryName = driver.findElement(By.xpath("//select[@name='CompanyCountry']//option[@value='AU']"));
             countryName.click();
             assertTrue(countryName.isSelected());
+            
+            //Loop to all dropdown values
+
+             
+             for(int i=1; i<100; i++) {
+            	 WebElement allCountries = driver.findElement(By.xpath("//option[text()='Country/Region']//following-sibling::option[" + i + "]"));
+          // 	    WebElement countryOption = driver.findElement(By.xpath("//select[@name='CompanyCountry']//option[" + i + "]"));
+
+            	 allCountries.click();
+            	 
+            	    // Optional: Verify if the option is selected or perform any other checks
+            	    if (allCountries.isSelected()) {
+            	        System.out.println("Option " + i + " selected: " + allCountries.getText());
+            	    } else {
+            	        System.out.println("Option " + i + " could not be selected.");
+            	    }
+            	 
+             }
+            
+            
 
             
             

@@ -97,6 +97,52 @@ public class GoogleSearchTest {
 
 
     }
+    
+    @Test
+    public void endToEndScenario() {
+        try {
+            // Step 1: Test URL and page title
+            driver.get("https://www.saucedemo.com/");
+            String pageTitle = driver.getTitle();
+            System.out.println("This is my page title: " + pageTitle);
+            assertEquals("Swag Labs", pageTitle);
+
+            WebElement logo = wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("login_logo")));
+            assertTrue(logo.isDisplayed());
+
+            // Step 2: Login Test
+            System.out.println("This is test to login ");
+
+            WebElement userNameField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("user-name")));
+            userNameField.clear();
+            userNameField.sendKeys("standard_user");
+            wait.until(ExpectedConditions.attributeToBe(userNameField, "value", "standard_user"));
+
+            WebElement passwordField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("password")));
+            passwordField.clear();
+            passwordField.sendKeys("secret_sauce");
+            wait.until(ExpectedConditions.attributeToBe(passwordField, "value", "secret_sauce"));
+
+            WebElement loginButton = wait.until(ExpectedConditions.elementToBeClickable(By.id("login-button")));
+            loginButton.click();
+
+            wait.until(ExpectedConditions.urlContains("/inventory.html"));
+
+            WebElement inventoryContainer = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("inventory_container")));
+            assertTrue("Login failed: Inventory page not loaded", inventoryContainer.isDisplayed());
+
+            System.out.println("Login successful: Inventory page loaded");
+
+            // Step 3: Additional test (replace with actual test logic)
+            System.out.println("This is also tested");
+
+            // Add more steps as needed for your end-to-end scenario
+
+        } catch (Exception e) {
+            System.out.println("Test failed: " + e.getMessage());
+            throw new RuntimeException(e);
+        }
+    }
 
     @After
     public void tearDown() {

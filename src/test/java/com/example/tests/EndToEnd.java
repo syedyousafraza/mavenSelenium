@@ -17,64 +17,51 @@ import java.time.Duration;
 
 public class EndToEnd {
 
-    private static WebDriver driver;
-    private static WebDriverWait wait;
+	private static WebDriver driver;
+	private static WebDriverWait wait;
 
-    @BeforeClass
-    public static void setUp() {
-        driver = DriverManager.getDriver();
-        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-    }
+	@BeforeClass
+	public static void setUp() {
+		driver = DriverManager.getDriver();
+		wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+	}
 
-    @Test
-    public void endToEndScenario() {
-        try {
-            // Step 1: Test URL and page title
-            driver.get("https://www.saucedemo.com/");
-            String pageTitle = driver.getTitle();
-            System.out.println("This is my page title: " + pageTitle);
-            assertEquals("Swag Labs", pageTitle);
+	@Test
+	public void endToEndScenario() {
+		try {
+			// Step 1: Test URL and page title
+			driver.get("https://www.salesforce.com/form/signup/elf-v2-login/?d=70130000000Enus");
+			String pageTitle = driver.getTitle();
+			System.out.println("This is my page title: " + pageTitle);
+			assertEquals("Sales Cloud Free Trial - Salesforce.com", pageTitle);
 
-            WebElement logo = wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("login_logo")));
-            assertTrue(logo.isDisplayed());
+			WebElement firstName = driver.findElement(By.xpath("//input[@name='UserFirstName']"));
+			firstName.sendKeys("Hello");
+			
+			
+            // Step 2: Here we are using few waits
+            WebElement lastName = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@name='UserLastName']")));
+            lastName.sendKeys("John Doe");
+            
+            //Selection of country from dropdown
+            
+            WebElement countryName = driver.findElement(By.xpath("//select[@name='CompanyCountry']//option[@value='AU']"));
+            countryName.click();
+            assertTrue(countryName.isSelected());
 
-            // Step 2: Login Test
-            System.out.println("This is test to login ");
+            
+            
 
-            WebElement userNameField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("user-name")));
-            userNameField.clear();
-            userNameField.sendKeys("standard_user");
-            wait.until(ExpectedConditions.attributeToBe(userNameField, "value", "standard_user"));
+		}
+		catch (Exception e) {
+			System.out.println("Test failed: " + e.getMessage());
+			throw new RuntimeException(e);
+		}
+	}
 
-            WebElement passwordField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("password")));
-            passwordField.clear();
-            passwordField.sendKeys("secret_sauce");
-            wait.until(ExpectedConditions.attributeToBe(passwordField, "value", "secret_sauce"));
-
-            WebElement loginButton = wait.until(ExpectedConditions.elementToBeClickable(By.id("login-button")));
-            loginButton.click();
-
-            wait.until(ExpectedConditions.urlContains("/inventory.html"));
-
-            WebElement inventoryContainer = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("inventory_container")));
-            assertTrue("Login failed: Inventory page not loaded", inventoryContainer.isDisplayed());
-
-            System.out.println("Login successful: Inventory page loaded");
-
-            // Step 3: Additional test (replace with actual test logic)
-            System.out.println("This is also tested");
-
-            // Add more steps as needed for your end-to-end scenario
-
-        } catch (Exception e) {
-            System.out.println("Test failed: " + e.getMessage());
-            throw new RuntimeException(e);
-        }
-    }
-
-    @AfterClass
-    public static void tearDown() {
-        // Uncomment the next line when you want to close the browser after all tests
-         DriverManager.quitDriver();
-    }
+	@AfterClass
+	public static void tearDown() {
+		// Uncomment the next line when you want to close the browser after all tests
+		DriverManager.quitDriver();
+	}
 }

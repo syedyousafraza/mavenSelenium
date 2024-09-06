@@ -14,6 +14,9 @@ public class SignupPage {
     private By emailField = By.name("UserEmail");
     private By phoneField = By.name("UserPhone");
     private By signupButton = By.id("signupBtn");
+    private By companyName1 = By.name("CompanyName");
+    
+ //   WebElement companyName = driver.findElement(By.xpath("//*[@id=\"CompanyName-CVgq\"]")); 
 
     // Constructor
     public SignupPage(WebDriver driver) {
@@ -45,5 +48,12 @@ public class SignupPage {
     public void clickSignupButton() {
         WebElement signupBtn = driver.findElement(signupButton);
         signupBtn.click();
+    }
+    
+    public void enterCompanyName(String name) {    	
+    	WebElement company = driver.findElement(companyName1);
+    	company.sendKeys(name);    	
+    	
+    	
     }
 }

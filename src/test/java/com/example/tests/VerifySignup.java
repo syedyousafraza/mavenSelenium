@@ -31,6 +31,7 @@ public class VerifySignup {
         signup.enterLastName("Raza");
         signup.enterEmail("yraza@example.com");
         signup.enterPhone("12345566");
+        signup.enterCompanyName("SSSSYYYYYYSSSS");
       
         //signup.clickSignupButton();
 
